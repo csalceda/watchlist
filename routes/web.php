@@ -43,6 +43,10 @@ Route::get('/admin/shows/create', [ShowsController::class, 'create'])->name('sho
 // Admin Genre
 Route::get('/admin/genre', [GenreController::class, 'index'])->name('genre');
 Route::get('/admin/genre/create', [GenreController::class, 'create'])->name('genre.create');
+Route::post('/admin/genre', [GenreController::class, 'store']);
+Route::get('/admin/genre/{genre}', [GenreController::class, 'edit'])->name('genre.update');
+Route::post('/admin/genre/{genre}', [GenreController::class, 'update']);
+Route::delete('/admin/genre/{genre}', [GenreController::class, 'destroy'])->name('genre.destroy');
 
 // Admin Status
 Route::get('/admin/status', [StatusController::class, 'index'])->name('status');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Genre;
 
 class GenreController extends Controller
 {
@@ -14,7 +15,11 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return view('admin.genre.index');
+        $data = [];
+
+        $data['genres'] = Genre::orderBy('title', 'asc')->paginate(6);
+
+        return view('admin.genre.index', $data);
     }
 
     /**
@@ -35,7 +40,17 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($this->validate($request, [
+            'name' => 'required|max:255',
+        ])) {
+
+            $data = [];
+            $data['title'] = $request->name;
+
+            Genre::create($data);
+
+            return redirect()->route('genre')->with('status', 'Genre successfully added!');
+        } 
     }
 
     /**
@@ -55,9 +70,12 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Genre $genre)
     {
-        //
+        $data = [];
+        $data['genre'] = $genre;
+
+        return view('admin.genre.edit', $data);
     }
 
     /**
@@ -67,9 +85,14 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Genre $genre, Request $request)
     {
-        //
+        $data = [];
+        $data['title'] = $request->name;
+
+        $genre->update($data);
+
+        return redirect()->route('genre')->with('status', 'Edit successful!');
     }
 
     /**
@@ -78,8 +101,10 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genre $genre)
     {
-        //
+        $genre->delete();
+        
+        return redirect()->route('genre')->with('status', 'Data successfully deleted!');
     }
 }

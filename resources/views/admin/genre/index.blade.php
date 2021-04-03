@@ -9,6 +9,12 @@
     </div>
     <hr>
 
+    @if(session('status'))
+        <div class="p-3 mb-2 container bg-success text-white">
+            {{session('status')}}
+        </div>
+    @endif
+
     {{-- Table --}}
     <table class="table">
         <thead class="table-primary">
@@ -19,16 +25,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Comedy</td>
-                <td>
-                    <a href="http://" class="btn btn-info">View</a>
-                    <a href="http://" class="btn btn-warning">Edit</a>
-                    <button type="button" class="btn btn-danger">Danger</button>
-    
-                </td>
-            </tr>
+            @foreach($genres as $genre)
+                <tr>
+                    <td>{{ $genre->id }}</td>
+                    <td>{{ $genre->title }}</td>
+                    <td class="d-flex">
+                        <a href="{{ route('genre.update', $genre->id) }}" class="btn btn-warning mx-1">Edit</a>
+                        <form action="{{ route('genre.destroy', $genre->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 

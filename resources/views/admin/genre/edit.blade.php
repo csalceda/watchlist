@@ -4,7 +4,7 @@
     
 <div class="container block my-4">
     <div class="d-flex justify-content-between">
-        <h4>Add Genre</h4>
+        <h4>Edit {{ Str::ucfirst($genre->title) }} genre</h4>
     </div>
     <hr>
 
@@ -16,11 +16,11 @@
 
     {{-- Start Form --}}
     <div class="container">
-        <form action="{{ route('genre') }}" method="post">
+        <form action="{{ route('genre.update', $genre) }}" method="post">
             @csrf
             <div class="form-group">
-                <label class="col-form-label" for="genre">Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="Genre" name="name" id="genre">
+                <label class="col-form-label" for="genre">Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="name" id="genre" value="{{ $genre->title }}">
                 @error('name')
                     <div class="m-2 text-danger">
                         {{ $message }}
