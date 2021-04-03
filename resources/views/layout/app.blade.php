@@ -9,6 +9,7 @@
     {{-- Stylesheet --}}
     <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('others/fontello/css/fontello.css' )}}">
 
 </head>
 <body>
@@ -16,6 +17,8 @@
     @include('include.navigation')
     
     @yield('content')
+
+    @include('include.footer')
     
     {{-- Scripts --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
