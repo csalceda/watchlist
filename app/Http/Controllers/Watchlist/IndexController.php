@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Watchlist;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Show;
+use App\Models\Status;
+use App\Models\Genre;
 
 class IndexController extends Controller
 {
@@ -14,7 +17,11 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('watchlist.index.index');
+        $data = [];
+
+        $data['shows'] = Show::latest()->get();
+
+        return view('watchlist.index.index', $data);
     }
 
     /**
