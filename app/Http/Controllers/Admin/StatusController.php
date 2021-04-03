@@ -92,7 +92,7 @@ class StatusController extends Controller
 
         $status->update($data);
 
-        return redirect()->route('status')->with('status', 'Edit successful!');
+        return redirect()->route('status')->with('status', 'Changes are saved!');
     }
 
     /**
