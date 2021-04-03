@@ -29,7 +29,7 @@ class IndexController extends Controller
     {
         $data = [];
         $data['query'] = $request->query();
-        // filter
+        
         $genre = $data['query']['genre'];
         $status = $data['query']['status'];
 
