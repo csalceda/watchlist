@@ -39,6 +39,11 @@ Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
 // Admin Show
 Route::get('/admin/shows', [ShowsController::class, 'index'])->name('shows');
 Route::get('/admin/shows/create', [ShowsController::class, 'create'])->name('shows.create');
+Route::post('/admin/shows', [ShowsController::class, 'store']);
+Route::get('/admin/shows/{show}/view', [ShowsController::class, 'show'])->name('shows.show');
+Route::get('/admin/shows/{show}', [ShowsController::class, 'edit'])->name('shows.update');
+Route::post('/admin/shows/{show}', [ShowsController::class, 'update']);
+Route::delete('/admin/shows/{show}', [ShowsController::class, 'destroy'])->name('show.destroy');
 
 // Admin Genre
 Route::get('/admin/genre', [GenreController::class, 'index'])->name('genre');

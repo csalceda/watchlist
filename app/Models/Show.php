@@ -15,12 +15,13 @@ class Show extends Model
 
     public function getStatus()
     {
-        return $this->hasOne(Status::class, 'id');
+        // Relationship (table, local key, foreign_key)
+        return $this->hasOne(Status::class, 'id', 'status_id');
     }
 
     public function getGenre()
     {
-        return $this->hasOne(Genre::class, 'id');
+        return $this->hasOne(Genre::class, 'id', 'genre_id');
     }
 
 }

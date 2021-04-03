@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Show;
+use App\Models\Status;
+use App\Models\Genre;
 
 class ShowsController extends Controller
 {
@@ -14,7 +17,10 @@ class ShowsController extends Controller
      */
     public function index()
     {
-        return view('admin.shows.index');
+        $data = [];
+        $data['shows'] = Show::latest()->paginate(9);
+
+        return view('admin.shows.index', $data);
     }
 
     /**
@@ -24,7 +30,12 @@ class ShowsController extends Controller
      */
     public function create()
     {
-        return view('admin.shows.create');
+        $data = [];
+
+        $data['genres'] = Genre::orderBy('title', 'asc')->get();
+        $data['statuses'] = Status::orderBy('title', 'asc')->get();
+
+        return view('admin.shows.create', $data);
     }
 
     /**
@@ -35,7 +46,35 @@ class ShowsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if($this->validate($request, [
+            'title' => 'required|max:255',
+            'status' => 'required',
+            'genre' => 'required',
+        ])) {
+            $data = [];
+
+            // Store image
+            if($request->file('show_image')) {
+                $image = $request->file('show_image');
+                $extension = $request->file('show_image')->getClientOriginalExtension();
+                $filename = rand(1111, 9999) . '.' . $extension;
+                $storage = 'show_img';
+                $image->move($storage, $filename);
+            }
+
+            $data['user_id'] = auth()->user()->id;
+            $data['title'] = $request->title;
+            $data['description'] = $request->description;
+            $data['status_id'] = $request->status;
+            $data['genre_id'] = $request->genre;
+            $data['image'] = $filename;
+
+            Show::create($data);
+
+            return redirect()->route('shows')->with('status', 'New show added!');
+
+        }
     }
 
     /**
@@ -44,9 +83,13 @@ class ShowsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Show $show)
     {
-        //
+        $data = [];
+
+        $data['show'] = $show;
+
+        return view('admin.shows.show', $data);
     }
 
     /**
@@ -55,9 +98,14 @@ class ShowsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Show $show)
     {
-        //
+        $data = [];
+        $data['show'] = $show;
+        $data['statuses'] = Status::get();
+        $data['genres'] = Genre::get();
+
+        return view('admin.shows.edit', $data);
     }
 
     /**
@@ -67,9 +115,28 @@ class ShowsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Show $show, Request $request)
     {
-        //
+        if($request->file('show_image')) {
+            $image = $request->file('show_image');
+            $extension = $request->file('show_image')->getClientOriginalExtension();
+            $filename = rand(1111, 9999) . '.' . $extension;
+            $storage = 'show_img';
+            $image->move($storage, $filename);
+        } else {
+            $filename = $show->image;
+        }
+
+        $data['user_id'] = auth()->user()->id;
+        $data['title'] = $request->title;
+        $data['description'] = $request->description;
+        $data['status_id'] = $request->status;
+        $data['genre_id'] = $request->genre;
+        $data['image'] = $filename;
+
+        $show->update($data);
+
+        return redirect()->route('shows')->with('status', 'Changes are saved!');
     }
 
     /**
@@ -78,8 +145,9 @@ class ShowsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Show $show)
     {
-        //
+        $show->delete();
+        return redirect()->route('shows')->with('status', 'Data successfully deleted!');
     }
 }
