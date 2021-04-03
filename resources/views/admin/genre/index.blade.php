@@ -25,22 +25,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($genres as $genre)
-                <tr>
-                    <td>{{ $genre->id }}</td>
-                    <td>{{ $genre->title }}</td>
-                    <td class="d-flex">
-                        <a href="{{ route('genre.update', $genre->id) }}" class="btn btn-warning mx-1">Edit</a>
-                        <form action="{{ route('genre.destroy', $genre->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+            @if($genres->count())
+                @foreach($genres as $genre)
+                    <tr>
+                        <td>{{ $genre->id }}</td>
+                        <td>{{ $genre->title }}</td>
+                        <td class="d-flex">
+                            <a href="{{ route('genre.update', $genre->id) }}" class="btn btn-warning mx-1">Edit</a>
+                            <form action="{{ route('genre.destroy', $genre->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
+    <div class="d-flex justify-content-end">
+        {{ $genres->links() }}
+    </div>
 
 </div>
 

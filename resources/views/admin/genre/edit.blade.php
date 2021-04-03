@@ -4,7 +4,7 @@
     
 <div class="container block my-4">
     <div class="d-flex justify-content-between">
-        <h4>Edit {{ Str::ucfirst($genre->title) }} genre</h4>
+        <h4>Edit "{{ Str::ucfirst($genre->title) }}" genre</h4>
     </div>
     <hr>
 
