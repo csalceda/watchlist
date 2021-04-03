@@ -10,6 +10,11 @@ class Status extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title'
     ];
+
+    public function shows()
+    {
+        $this->belongsTo(User::class, 'genre_id');
+    }
 }

@@ -19,8 +19,10 @@ class CreateShowsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->string('genre');
-            $table->string('status');
+            $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('genre_id')->references('id')->on('genres');
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
         });
     }
