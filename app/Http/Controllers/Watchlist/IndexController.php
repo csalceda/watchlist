@@ -18,10 +18,30 @@ class IndexController extends Controller
     public function index()
     {
         $data = [];
-
         $data['shows'] = Show::latest()->get();
+        $data['genres'] = Genre::get();
+        $data['statuses'] = Status::get();
 
         return view('watchlist.index.index', $data);
+    }
+
+    public function filter(Request $request)
+    {
+        $data = [];
+        $data['query'] = $request->query();
+        // filter
+        $genre = $data['query']['genre'];
+        $status = $data['query']['status'];
+
+        $data['genres'] = Genre::get();
+        $data['statuses'] = Status::get();
+
+        if(isset($genre) || isset($status)) {
+            $data['shows'] = Show::where('genre_id', '=', $genre)
+                            ->orWhere('status_id', '=', $status)
+                            ->get();
+            return view('watchlist.index.index', $data);
+        }
     }
 
     /**

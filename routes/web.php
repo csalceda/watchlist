@@ -63,3 +63,6 @@ Route::delete('/admin/status/{status}', [StatusController::class, 'destroy'])->n
 
 // Watchlist Landing Page
 Route::get('/', [IndexController::class, 'index'])->name('index');
+
+// Front Filter
+Route::get('/filter', [IndexController::class, 'filter'])->name('shows.filter');

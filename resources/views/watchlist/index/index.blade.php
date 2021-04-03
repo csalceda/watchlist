@@ -3,7 +3,35 @@
 @section('content')
 
 <div class="container my-4">
-    <h3>All Shows</h3>
+    <div class="row">
+        <div class="col">
+            <h3 class="my-2">All Shows</h3>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <form action="{{ route('shows.filter') }}" method="get">
+                <select name="genre" id="genre" class="form-control-sm mx-2 mt-1">
+                    @if($genres->count())
+                        <option value="" selected>Genre</option>
+                        @foreach($genres as $genre)
+                            <option value="{{ $genre->id }}" >{{ $genre->title }}</option>
+                        @endforeach
+                    @endif
+                </select>
+                <select name="status" id="status" class="form-control-sm mx-2 mt-1">
+                    @if($statuses->count())
+                        <option value="" selected>Status</option>
+                        @foreach($statuses as $status)
+                            <option value="{{ $status->id }}" >{{ $status->title }}</option>
+                        @endforeach
+                    @endif
+                </select>
+                <button type="submit" class="btn btn-link mx-0">Go</button>
+                @if(isset($query))
+                    <a href="{{ route('index') }}" class="btn btn-link text-decoration-none mx-0">Clear Filter</a>
+                @endif
+            </form>
+        </div>
+    </div>
     <hr>
     {{-- Cards --}}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
