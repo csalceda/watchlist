@@ -51,7 +51,10 @@ Route::delete('/admin/genre/{genre}', [GenreController::class, 'destroy'])->name
 // Admin Status
 Route::get('/admin/status', [StatusController::class, 'index'])->name('status');
 Route::get('/admin/status/create', [StatusController::class, 'create'])->name('status.create');
-
+Route::post('/admin/status', [StatusController::class, 'store']);
+Route::get('/admin/status/{status}', [StatusController::class, 'edit'])->name('status.update');
+Route::post('/admin/status/{status}', [StatusController::class, 'update']);
+Route::delete('/admin/status/{status}', [StatusController::class, 'destroy'])->name('status.destroy');
 
 // Watchlist Landing Page
 Route::get('/', [IndexController::class, 'index'])->name('index');
