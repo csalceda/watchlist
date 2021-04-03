@@ -34,11 +34,14 @@
             </li>
         </ul>
         <ul class="navbar-nav mr-3">
-            <li class="nav-item mx-2">
+            <li class="nav-item mx-2 mt-2">
                 <a href="{{ route('index') }}" class="border py-2 px-3">Go to website</a>
             </li>
             <li class="nav-item mx-2">
-                <a href="#">Logout</a>
+                <form action="{{ route('logout') }}" method="get">
+                    @csrf
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
             </li>
         </ul>
     </div>
