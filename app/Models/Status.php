@@ -12,9 +12,4 @@ class Status extends Model
     protected $fillable = [
         'title'
     ];
-
-    public function shows()
-    {
-        $this->belongsTo(User::class, 'genre_id');
-    }
 }

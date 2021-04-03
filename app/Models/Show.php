@@ -12,4 +12,15 @@ class Show extends Model
     protected $fillable = [
         'user_id', 'title', 'description', 'status_id', 'genre_id', 'image'
     ];
+
+    public function getStatus()
+    {
+        return $this->hasOne(Status::class, 'id');
+    }
+
+    public function getGenre()
+    {
+        return $this->hasOne(Genre::class, 'id');
+    }
+
 }
