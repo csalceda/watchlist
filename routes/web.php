@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Watchlist\IndexController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\ShowsController;
 use App\Http\Controllers\Admin\StatusController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,17 @@ use App\Http\Controllers\Admin\StatusController;
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+// Admin Register
+Route::get('/admin/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/admin/register', [RegisterController::class, 'store']);
+
+// Admin Login
+Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
+Route::post('/admin/login', [LoginController::class, 'store']);
+
+// Admin Logout
+Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
 
 // Admin Show
 Route::get('/admin/shows', [ShowsController::class, 'index'])->name('shows');
