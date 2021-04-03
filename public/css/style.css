@@ -88,3 +88,20 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Carousel */
+.carousel-inner img {
+    width: 300px;
+    height: auto;
+}
+
+.slide {
+    width: 300px;
+}
+
+/* About Page */
+.about-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

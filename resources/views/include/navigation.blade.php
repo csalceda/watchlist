@@ -35,6 +35,8 @@
   </div>
 </nav>
 
+@if($_SERVER['REQUEST_URI'] != '/about')
 <div class="header-image">
   <img src="{{ asset('img/header.jpg') }}" alt="akutagawa lang sakalam">
 </div>
+@endif
