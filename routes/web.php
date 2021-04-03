@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ShowsController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Watchlist\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,8 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // Front Filter
 Route::get('/filter', [IndexController::class, 'filter'])->name('shows.filter');
+
+// About Page
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+// Message Page
