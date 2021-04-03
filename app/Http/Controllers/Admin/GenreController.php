@@ -92,7 +92,7 @@ class GenreController extends Controller
 
         $genre->update($data);
 
-        return redirect()->route('genre')->with('status', 'Edit successful!');
+        return redirect()->route('genre')->with('status', 'Changes are saved!');
     }
 
     /**
