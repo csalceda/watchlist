@@ -8,10 +8,12 @@
             <img class="about-img" src="{{ asset('img/slide/1.jpg') }}" alt="film">
         </div>
         <div class="col-sm-6">
-            <p class="pt-120 pb-120">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos impedit quam totam distinctio suscipit eveniet minus culpa dolores corporis blanditiis? Repellat, facere recusandae? Saepe delectus accusamus nulla aliquid quidem incidunt praesentium sit quasi. Qui quos eligendi alias, sunt repellendus sed?</p>
+            <h2 class="pt-120">hello</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos impedit quam totam distinctio suscipit eveniet minus culpa dolores corporis blanditiis? Repellat, facere recusandae? Saepe delectus accusamus nulla aliquid quidem incidunt praesentium sit quasi. Qui quos eligendi alias, sunt repellendus sed?</p>
         </div>
     </div>
 </div>
+
 
 {{-- Carousel --}}
 {{-- <div id="demo" class="carousel slide" data-ride="carousel">
@@ -22,7 +24,6 @@
         <li data-target="#demo" data-slide-to="1"></li>
         <li data-target="#demo" data-slide-to="2"></li>
     </ul>
-  
   <!-- The slideshow -->
     <div class="carousel-inner">
         <div class="carousel-item active">
